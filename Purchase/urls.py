@@ -28,4 +28,7 @@ urlpatterns = [
     path('editItemPurchased/<str:id>', views.EditItemPurchased.as_view(), name='editItemPurchased' ),
     path('addSuppliers/', views.AddSuppliers.as_view(), name='addSuppliers' ),
     path('viewSuppliers/', views.ViewSuppliers.as_view(), name='viewSuppliers' ),
+    path('deleteSuppliers/<str:id>', views.DeleteSuppliers.as_view(), name='deleteSuppliers' ),
+    path('editSuppliers/<str:id>', views.editSuppliers.as_view(), name='editSuppliers' ),
+
 ]

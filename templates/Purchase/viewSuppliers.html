@@ -6,6 +6,7 @@
 {% endblock %}
 {% block style %}
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 <link rel="stylesheet" href="{% static '/css/item_master.css' %}" />
 
 {% if is_retrieve %}
@@ -41,20 +42,20 @@
         <td>{{ forloop.counter }}</td>
 				<td>{{ Supplier.name }}</td>
 				<td>{{ Supplier.gst }}</td>
-        <td>
-        <div class="row">
-        <div class="col-sm-4">
-        <a href=""><button type="button" name="button"><i class="fas fa-edit"></i>
-        </button></a>
-        </div>
-        <div class="col-sm-4">
-        <form type="hidden" action="" method="post">
-        {% csrf_token %}
-        <button type="submit" name="button"><i class="fas fa-trash"></i>
-        </button>
-        </form>
-        </div>
-        </div>
+        <td class="rate">
+					<div class="row">
+						<div class="col-sm-1">
+								<a href="{% url 'editSuppliers' Supplier.id %}""><button type="button" name="button"><i class="fas fa-edit"></i>
+								</button></a>
+						</div>
+					<div class="col-sm-1">
+						<form action="{% url 'deleteSuppliers' Supplier.id  %}"type="hidden" action="" method="post">
+							{% csrf_token %}
+							<button type="submit" name="button"><i class="fas fa-trash"></i>
+							</button>
+						</form>
+					</div>
+					</div>
         </td>
 		    </tr>
 				{% endfor %}

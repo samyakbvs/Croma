@@ -120,3 +120,21 @@ class AddSuppliers(APIView):
         Supplier.save()
         all_suppliers = Suppliers.objects.all()
         return render(request,'Purchase/viewSuppliers.html',{'all_suppliers':all_suppliers})
+class DeleteSuppliers(APIView):
+    def post(self,request,id):
+        supplier = Suppliers.objects.get(id=id)
+        supplier.delete()
+        all_suppliers = Suppliers.objects.all()
+        return render(request, 'Purchase/viewSuppliers.html', {'all_suppliers':all_suppliers})
+class editSuppliers(APIView):
+    def get(self,request,id):
+        Supplier = Suppliers.objects.get(id=id)
+        return render(request, 'Purchase/editSuppliers.html', {'Supplier':Supplier})
+    def post(self,request,id):
+        Supplier = Suppliers.objects.get(id=id)
+        Supplier.name = request.POST['name']
+        Supplier.address = request.POST['address']
+        Supplier.gst = request.POST['gstin']
+        Supplier.save()
+        all_suppliers = Suppliers.objects.all()
+        return render(request, 'Purchase/viewSuppliers.html', {'all_suppliers':all_suppliers})
