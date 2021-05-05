@@ -7,7 +7,7 @@
                 <th class='rate'>Item Code</th>
                 <th class='total_qty'>Qty</th>
                 <th class='rate'>Rate</th>
-                <td class='rate'>Discount</td>
+                <th class='rate'>Discount</th>
                 <th class='sgst'>CGST%</th>
                 <th class='cgst'>SGST%</th>
                 <th class='amt'>Amount</th>
@@ -50,11 +50,11 @@
             <td class='item_name'></td>
             <td class='rate'></td>
             <td class='total_qty'></td>
-            <td class='rate'></td>
-            <td class='rate'>{{Invoice.Raw_amount}}</td>
+            <th class='rate'>Saved</th>
+            <th class='rate'>{{Invoice.subtracted}}</th>
             <td class='sgst'></td>
-            <td class='cgst'></td>
-            <td class='amt'>{{Invoice.Final_amount}}</td>
+            <th class='cgst'>Total</th>
+            <th class='amt'>{{Invoice.Final_amount}}</th>
             <td class='buttons'>
           </tr>
         </tbody>

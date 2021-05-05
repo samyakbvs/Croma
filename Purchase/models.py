@@ -19,6 +19,9 @@ class SupplierInvoice(models.Model):
     Raw_amount = models.BigIntegerField(default=0)
     Final_amount = models.BigIntegerField(default=0)
 
+    def subtracted(self):
+        return (self.Raw_amount - self.Final_amount)
+
     def __str__(self):
         return str(self.Inv_num)
 
