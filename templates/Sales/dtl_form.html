@@ -1,0 +1,97 @@
+{% load static %}
+<div id="myModal" class="modal modal-ms purchase_item_form" id="item-purchase-modal-editor" tabindex='-1' role="dialog" aria-labelledby="editor-title" data-backdrop="static" data-keyboard="false">
+  <style scoped>
+    .form-group.required .control-label:after {
+      content:"*";
+      color:red;
+      margin-left: 4px;
+    }
+  </style>
+  <div class="modal-dialog" role="document" tabindex='-1'>
+
+
+    <form action="{% url 'sellItem' Invoice.Inv_num %}" method="post" class="modal-content form-horizontal" id="Item-purchase-form">
+      {% csrf_token %}
+      <div class="modal-header" >
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h4 class="modal-title" id="editor-title">Add Item</h4>
+      </div>
+
+      <div class="modal-body">
+          <div class = "row">
+          <div class = "col-sm-12">
+
+            <div class = "row item-1row">
+              <div class="form-group required col-sm-6" style = "margin-right: 15px;">
+               <label for="item_name" class="control-label labelType1">Item Name </label>
+               <select name="name" id = "item_name">
+                 {% for Item in Items %}
+                 <option value="{{ Item.name }}">{{ Item.name }}</option>
+                 {% endfor %}
+               </select>
+              </div>
+              <div class="form-group required col-sm-6" style = "margin-right: 15px;">
+               <label for="item_name" class="control-label labelType1">Item Code </label>
+                <input type="text" name="code" id = "id_item_id">
+              </div>
+            </div>
+            <div class = "row item-1row">
+              <div class="form-group required col-sm-6" style = "margin-right: 15px;">
+               <label for="item_name" class="control-label labelType1">Quantity </label>
+                <input type="number" name="quantity" id = "id_item_id">
+              </div>
+              <div class="form-group required col-sm-6" style = "margin-right: 15px;">
+               <label for="item_name" class="control-label labelType1">Price </label>
+                <input type="number "name="price" id = "id_item_id">
+              </div>
+            </div>
+            <div class = "row item-1row">
+              <div class="form-group required col-sm-6" style = "margin-right: 15px;">
+               <label for="item_name" class="control-label labelType1">Discount(%)</label>
+                <input type="number" name="discount"id = "id_item_id">
+              </div>
+            </div>
+
+
+
+
+
+              <div class = "row item-6row">
+                <div class="form-group col-sm-6" >
+                <label for="cgst" class="control-label labelType1">C-GST(%)</label>
+                <select name="cgst" id = "id_cgst">
+                  <option value="0">0%</option>
+                  <option value="2.5">2.5%</option>
+                  <option value="6" selected="selected">6%</option>
+                  <option value="9">9%</option>
+                  <option value="14">14%</option>
+                </select>
+              </div>
+              <div class="col-sm-1" ></div>
+              <div class="form-group col-sm-6">
+                <label for="sgst" class="control-label labelType2">S-GST(%)</label>
+                <select name="sgst" id = "id_sgst">
+                  <option value="0">0%</option>
+                  <option value="2.5">2.5%</option>
+                  <option value="6" selected>6%</option>
+                  <option value="9">9%</option>
+                  <option value="14">14%</option>
+                </select>
+              </div>
+
+            </div>
+
+
+          </div> <!-- END OF COL-MD-9 -->
+        </div>
+          <div class = "row">
+            <center>
+
+              <input type="submit" id = "purchase-item-submit" class="btn btn-primary" value = "Add item">
+            </center>
+
+          </div>
+      </div> <!-- End of model Body -->
+    </form>
+  </div>
+</div>

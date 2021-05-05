@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      #purchase_item_table{
+         border: 1px solid black;
+      }
+      table, th, td {
+        border: 1px solid black;
+      }
+      td{
+        margin: 30px;
+      }
+    </style>
+  </head>
+  <body>
+
+
+
+  <div class = "row">
+    <div class = "col-sm-9 firstCol">
+
+  <div class="container-fluid" style="margin-top:8px;">
+    Reports 
+      <table id="purchase_item_table" class="table table-hover table-bordered">
+          <thead class="thead-inverse" id="purchase_table_head">
+              <tr>
+                <th class='item_name'>No.</th>
+                <th class='item_name'>Items name</th>
+                <th class='item_name'>Code</th>
+                <th class='item_name'>Purchase cost</th>
+                <th class='item_name'>Sales revenue</th>
+                <th class='item_name'>Profit/loss</th>
+              </tr>
+              {% for item in main_list %}
+              <tr>
+                <td style:"text-align:center" class='item_name'>{{forloop.counter}}</td>
+
+
+                <td style:"text-align:center" class='item_name'>{{item.0}}</td>
+
+                <td style:"text-align:center" class='item_name'>{{item.1}}</td>
+                <td style:"text-align:center" class='item_name'>{{item.2}}</td>
+                <td style:"text-align:center" class='item_name'>{{item.3}}</td>
+                {% if item.4 < 0 %}
+                <td style="color:red;" class='item_name'>{{item.4}}</td>
+                {% else %}
+                <td style="color:green;" class='item_name'>{{item.4}}</td>
+                {% endif %}
+              </tr>
+              {% endfor %}
+          </thead>
+          <tbody id="purchase_table_body">
+          </tbody>
+      </table>
+
+
+
+  </div>
+</div>
+</div>
+</body>
+</html>

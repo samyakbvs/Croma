@@ -1,0 +1,70 @@
+<div class="container-fluid" style="margin-top:8px;">
+    <table id="purchase_item_table" class="table table-hover table-bordered">
+        <thead style="width: 100%;"class="thead-inverse" id="purchase_table_head">
+            <tr>
+              <th class='rate'>No.</th>
+                <th class='item_name'>Item Name</th>
+                <th class='rate'>Item Code</th>
+                <th class='total_qty'>Qty</th>
+                <th class='qty_free'>FreeQty</th>
+                <th class='rate'>Rate</th>
+                <th class='rate'>Discount</th>
+                <th class='sgst'>CGST%</th>
+                <th class='cgst'>SGST%</th>
+                <th class='amt'>Amount</th>
+                <th class='buttons'>Buttons</th>
+            </tr>
+        </thead>
+
+        <tbody id="purchase_table_body">
+          {% for item_purchased in Invoice.items.all %}
+
+          <tr>
+              <td class='rate'>{{forloop.counter}}</td>
+              <td class='item_name'>{{item_purchased.name}}</td>
+              <td class='rate'>{{item_purchased.code}}</td>
+              <td class='total_qty'>{{item_purchased.quantity}}</td>
+              <td class='qty_free'>{{item_purchased.quantity_free}}</td>
+              <td class='rate'>{{item_purchased.price}}</td>
+              <td class='rate'>{{item_purchased.discount}}</td>
+              <td class='sgst'>{{item_purchased.sgst}}</td>
+              <td class='cgst'>{{item_purchased.cgst}}</td>
+              <td class='amt'>{{item_purchased.amount}}</td>
+              <td class='buttons'>
+                <div class="row">
+                  <div class="col-sm-4">
+                      <a href="{% url 'editItemPurchased' item_purchased.id %}"><button type="button" name="button"><i class="fas fa-edit"></i>
+
+
+                      </button></a>
+                  </div>
+                <div class="col-sm-4">
+                  <form type="hidden" action="{% url 'deleteItemSold' item_purchased.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" name="button"><i class="fas fa-trash"></i>
+
+                    </button>
+                  </form>
+                </div>
+                </div>
+
+
+              </td>
+          </tr>
+          {% endfor %}
+          <tr>
+            <td class='rate'></td>
+            <td class='item_name'></td>
+            <td class='rate'></td>
+            <td class='total_qty'></td>
+            <td class='qty_free'>{{item_purchased.quantity_free}}</td>
+            <td class='rate'></td>
+            <td class='rate'>{{Invoice.Raw_amount}}</td>
+            <td class='sgst'></td>
+            <td class='cgst'></td>
+            <td class='amt'>{{Invoice.Final_amount}}</td>
+            <td class='buttons'>
+          </tr>
+        </tbody>
+    </table>
+</div>

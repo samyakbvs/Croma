@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head_extra %}
+<title>Item Master | Croma</title>
+{% endblock %}
+{% block style %}
+
+<link rel="stylesheet" href="{% static '/css/item_master.css' %}" />
+
+{% if is_retrieve %}
+<style>
+.edit_row, .del_row{
+	pointer-events: none;
+	cursor: default;
+}
+</style>
+{% endif %}
+{% endblock %}
+{% block content %}
+{% include "navbar.html" %}
+
+	<center>
+		<div class="addBatchesInfo">
+
+		</div>
+	</center>
+	<div class = "container-fluid" style="margin-top:10px;">
+		<table id = "item_batch_table" class="table table-hover table-bordered" >
+		  <thead style="width: 100%;"class="thead-inverse" id = "item_batch_table_head">
+		    <tr>
+				<th>No.</th>
+				<th>Item</th>
+				<th >Code</th>
+				<th>Description</th>
+				<th>Quantity</th>
+		    </tr>
+		  </thead>
+		  <tbody id = "item_batch_table_body">
+				{% for Item in Items_all %}
+				<tr>
+				<td>{{ forloop.counter }}</td>
+				<td>{{ Item.name }}</td>
+				<td>{{ Item.code }}</td>
+				<td>{{ Item.description }}</td>
+				<td>{{ Item.stock}}</td>
+		    </tr>
+				{% endfor %}
+		  </tbody>
+		</table>
+		<center>
+	    <div class = "addItemText">
+	      <!-- Trigger/Open The Modal -->
+	  <button id="myBtn1">Add items</button>
+	  {% include "Items/dtl_form.html" %}
+
+
+	  </center>
+	</div>
+
+
+
+{% endblock %}
+
+{% block script %}
+
+<script type="text/javascript">
+{% include 'Items/items.js'%}</script>
+
+
+{% endblock %}

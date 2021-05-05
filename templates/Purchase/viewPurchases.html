@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head_extra %}
+<title>Purchase Invoice | Croma</title>
+{% endblock %}
+{% block style %}
+
+<link rel="stylesheet" href="{% static '/css/purchase.css' %}" />
+
+
+{% endblock %}
+{% block content %}
+	{% include "navbar.html" %}
+
+  <div class = "row">
+    <div class = "col-sm-9 firstCol">
+
+  <div class="container-fluid" style="margin-top:8px;">
+    <form  action="{% url 'filterSupplierInvoice' %}"method="post">
+    {% csrf_token %}
+    <input name="query" type="number" placeholder="Enter here">
+    <button type="submit" name="button">Search invoice</button>
+  </form>
+      <table id="purchase_item_table" class="table table-hover table-bordered">
+          <thead class="thead-inverse" id="purchase_table_head">
+              <tr>
+                <th class='item_name'>No.</th>
+                <th class='item_name'>Supplier name</th>
+                <th class='item_name'>Invoice number</th>
+                <th class='item_name'>Date</th>
+                <th class='item_name'>Document date</th>
+                <th class='item_name'>Document number</th>
+                <th class='item_name'>Mode of transaction</th>
+                <th class='item_name'>Total amount</th>
+              </tr>
+              {% for Purchase in Purchases_all %}
+              <tr>
+                <td class='item_name'>{{forloop.counter}}</td>
+                <td class='item_name'>{{Purchase.Name.name}}</td>
+                <td class='item_name'><a href="{% url 'viewSupplierInvoice' Purchase.Inv_num %}">{{Purchase.Inv_num}}</a></td>
+                <td class='item_name'>{{Purchase.Date}}</td>
+                <td class='item_name'>{{Purchase.Doc_date}}</td>
+                <td class='item_name'>{{Purchase.Doc_num}}</td>
+                <td class='item_name'>{{Purchase.Mode}}</td>
+                <td class='item_name'>{{Purchase.Final_amount}}</td>
+              </tr>
+              {% endfor %}
+          </thead>
+          <tbody id="purchase_table_body">
+          </tbody>
+      </table>
+      <a href="{% url 'itemPurchased' %}"><button type="button" name="button">Add new invoice</button></a>
+
+  </div>
+</div>
+</div>
+
+{% endblock %}
+{% block script %}
+
+
+
+<script type="text/javascript">
+{% include "Purchase/purchase.js" %}
+</script>
+{% endblock %}

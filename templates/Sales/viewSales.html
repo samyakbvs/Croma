@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head_extra %}
+<title>Purchase Invoice | Croma</title>
+{% endblock %}
+{% block style %}
+
+<link rel="stylesheet" href="{% static '/css/purchase.css' %}" />
+
+{% endblock %}
+{% block content %}
+	{% include "navbar.html" %}
+
+  <div class = "row">
+    <div class = "col-sm-9 firstCol">
+			<div class="container-fluid" style="margin-top:8px;">
+
+  <div class="container-fluid" style="margin-top:8px;">
+		<form  action="{% url 'filterBuyerInvoice' %}"method="post">
+		{% csrf_token %}
+		<input name="query" type="number" placeholder="Enter here">
+		<button type="submit" name="button">Search invoice</button>
+	</form>
+      <table id="purchase_item_table" class="table table-hover table-bordered">
+          <thead class="thead-inverse" id="purchase_table_head">
+              <tr>
+									<th class='item_name'>No.</th>
+                  <th class='item_name'>Name</th>
+                  <th class='item_name'>Invoice number</th>
+									<th class='item_name'>Date</th>
+									<th class='item_name'>Document date</th>
+									<th class='item_name'>Document number</th>
+									<th class='item_name'>Mode of transaction</th>
+									<th class='item_name'>Total amount</th>
+              </tr>
+              {% for Sell in Sales_all %}
+              <tr>
+									<td class='item_name'>{{forloop.counter}}</td>
+                  <td class='item_name'>{{Sell.Name}}</td>
+                  <td class='item_name'><a href="{% url 'viewBuyerInvoice' Sell.Inv_num %}">{{Sell.Inv_num}}</a></td>
+									<td class='item_name'>{{Sell.Date}}</td>
+                  <td class='item_name'>{{Sell.Doc_date}}</td>
+									<td class='item_name'>{{Sell.Doc_num}}</td>
+                  <td class='item_name'>{{Sell.Mode}}</td>
+									<td class='item_name'>{{Sell.Final_amount}}</td>
+              </tr>
+              {% endfor %}
+          </thead>
+          <tbody id="purchase_table_body">
+          </tbody>
+      </table>
+      <a href="{% url 'itemSold' %}"><button type="button" name="button">Add new invoice</button></a>
+
+  </div>
+</div>
+</div>
+
+{% endblock %}
+{% block script %}
+
+
+
+<script type="text/javascript">
+{% include "Sales/sales.js" %}
+</script>
+{% endblock %}

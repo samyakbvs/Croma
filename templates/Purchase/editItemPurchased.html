@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head_extra %}
+<title>Purchase Invoice | Croma</title>
+{% endblock %}
+{% block style %}
+
+<link rel="stylesheet" href="{% static '/css/purchase.css' %}" />
+<style media="screen">
+
+</style>
+
+{% endblock %}
+{% block content %}
+
+	{% include "navbar.html" %}
+  <style scoped>
+    .form-group.required .control-label:after {
+      content:"*";
+      color:red;
+      margin-left: 4px;
+    }
+  </style>
+
+  <div style="width: 45%;" class="container-fluid">
+    <center>
+    <form action="{% url 'editItemPurchased' item_purchased.id%}" method="post" class="modal-content form-horizontal" id="Item-purchase-form">
+      {% csrf_token %}
+      <div class="modal-header" >
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h4 class="modal-title" id="editor-title">Edit Item</h4>
+      </div>
+
+      <div class="modal-body">
+          <div class = "row">
+          <div class = "col-sm-12">
+            <div class = "row item-1row">
+              <div class="form-group required col-sm-12" style = "margin-right: 15px;">
+               <label for="item_name" class="control-label labelType1">Item Name </label>
+                <input type="text" readonly name="name" value="{{item_purchased.name}}" id = "id_item_id">
+              </div>
+            </div>
+          </div>
+          <div class = "col-sm-12">
+            <div class = "row item-1row">
+              <div class="form-group required col-sm-12" style = "margin-right: 15px;">
+               <label for="item_name" class="control-label labelType1">Item Code </label>
+                <input type="text" name="code" readonly value="{{item_purchased.code}}" id = "id_item_id">
+              </div>
+            </div>
+          </div>
+          <div class = "col-sm-12">
+            <div class = "row item-1row">
+              <div class="form-group required col-sm-12" style = "margin-right: 15px;">
+               <label for="item_name" class="control-label labelType1">Qty </label>
+                <input type="number" name="quantity" value="{{item_purchased.quantity}}" id = "id_item_id">
+              </div>
+            </div>
+          </div>
+          <div class = "col-sm-12">
+            <div class = "row item-1row">
+              <div class="form-group required col-sm-12" style = "margin-right: 15px;">
+               <label for="item_name" class="control-label labelType1">Free_qty </label>
+                <input type="number" name="quantity_free" value="{{item_purchased.quantity_free}}" id = "id_item_id">
+              </div>
+            </div>
+          </div>
+          <div class = "col-sm-12">
+            <div class = "row item-1row">
+              <div class="form-group required col-sm-12" style = "margin-right: 15px;">
+               <label for="item_name" class="control-label labelType1">Price </label>
+                <input type="number" name="price" value="{{item_purchased.price}}" id = "id_item_id">
+              </div>
+            </div>
+          </div>
+          <div class = "col-sm-12">
+            <div class = "row item-1row">
+              <div class="form-group required col-sm-12" style = "margin-right: 15px;">
+               <label for="item_name" class="control-label labelType1">Discount </label>
+                <input type="number" name="discount" value="{{item_purchased.discount}}" id = "id_item_id">
+              </div>
+            </div>
+          </div>
+          <div class="form-group col-sm-6" >
+          <label for="cgst" class="control-label labelType1">C-GST(%)</label>
+          <select name="cgst" id = "id_cgst">
+            <option value="0">0%</option>
+            <option value="2.5">2.5%</option>
+            <option value="6" selected="selected">6%</option>
+            <option value="9">9%</option>
+            <option value="14">14%</option>
+          </select>
+        </div>
+        <div class="form-group col-sm-6">
+          <label for="sgst" class="control-label labelType2">S-GST(%)</label>
+          <select name="sgst" id = "id_sgst">
+            <option value="0">0%</option>
+            <option value="2.5">2.5%</option>
+            <option value="6" selected>6%</option>
+            <option value="9">9%</option>
+            <option value="14">14%</option>
+          </select>
+        </div>
+
+
+
+          </div> <!-- END OF COL-MD-9 -->
+        </div>
+          <div class = "row">
+            <center>
+
+              <input style="margin-bottom: 25px;"type="submit" id = "purchase-item-submit" class="btn btn-primary" value = "Edit item">
+            </center>
+
+          </div>
+     <!-- End of model Body -->
+    </form>
+    <center>
+
+
+  </div>
+
+{% endblock %}
+{% block script %}
+
+
+
+<script type="text/javascript">
+{% include 'Sales/sales.js'%}
+</script>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% load static %}
+<div id="myModal1" class="modal modal-ms purchase_item_form" id="item-purchase-modal-editor" tabindex='-1' role="dialog" aria-labelledby="editor-title" data-backdrop="static" data-keyboard="false">
+  <style scoped>
+    .form-group.required .control-label:after {
+      content:"*";
+      color:red;
+      margin-left: 4px;
+    }
+  </style>
+  <div class="modal-dialog" role="document" tabindex='-1'>
+
+
+    <form action="{% url 'addItem' %}" method="post" class="modal-content form-horizontal" id="Item-purchase-form">
+      {% csrf_token %}
+      <div class="modal-header" >
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h4 class="modal-title" id="editor-title">Add Item</h4>
+      </div>
+
+      <div class="modal-body">
+          <div class = "row">
+          <div class = "col-sm-12">
+
+            <div class = "row item-1row">
+              <div class="form-group required col-sm-6" style = "margin-right: 15px;">
+               <label for="item_name" class="control-label labelType1">Item Name </label>
+                <input type="text" name="name" id = "id_item_id">
+              </div>
+              <div class="form-group required col-sm-6" style = "margin-right: 15px;">
+               <label for="item_name" class="control-label labelType1">Item Code </label>
+                <input type="text" name="code" id = "id_item_id">
+              </div>
+            </div>
+            <div class = "row item-1row">
+              <div class="form-group required col-sm-6" style = "margin-right: 15px;">
+               <label for="item_name" class="control-label labelType1">Item Text</label>
+                <input type="text" name="description" id = "id_item_id">
+              </div>
+              <div class="form-group required col-sm-6" style = "margin-right: 15px;">
+               <label for="item_name" class="control-label labelType1">Item Stock</label>
+                <input type="text" name="stock" id = "id_item_id">
+              </div>
+            </div>
+
+
+
+
+
+
+
+
+          </div> <!-- END OF COL-MD-9 -->
+        </div>
+          <div class = "row">
+            <center>
+
+              <input type="submit" id = "purchase-item-submit" class="btn btn-primary" value = "Add Item">
+            </center>
+
+          </div>
+      </div> <!-- End of model Body -->
+    </form>
+  </div>
+</div>
