@@ -57,11 +57,15 @@ class PurchaseItem(APIView):
         quantity = int(request.POST['quantity'])
         free_quantity = int(request.POST['free_quantity'])
         price = int(request.POST['price'])
-        discount = int(request.POST['discount'])
+        # Removed manually inputting discount
+        # discount = int(request.POST['discount'])
         cgst = int(request.POST['cgst'])
         sgst = int(request.POST['sgst'])
-        raw_amount = price*quantity*(1+cgst/100)*(1+sgst/100)
-        amount = price*quantity*(1+cgst/100)*(1+sgst/100)*(1-discount/100)
+        # Added manually inputting amount
+        amount = int(request.POST['amount'])
+        raw_amount = price*quantity
+        #Calculating discount
+        discount = ((raw_amount-amount)/raw_amount)*100
         invoice.Raw_amount += raw_amount
         invoice.Final_amount += amount
         invoice.save()
@@ -98,12 +102,21 @@ class EditItemPurchased(APIView):
         item_purchased.name.stock += diff_quantity
         item_purchased.name.save()
         item_purchased.price = request.POST['price']
-        item_purchased.discount = request.POST['discount']
+        # Removed manually updating discount
+        # item_purchased.discount = request.POST['discount']
         item_purchased.cgst = int(request.POST['cgst'])
         item_purchased.sgst = int(request.POST['sgst'])
         item_purchased.quantity = request.POST['quantity']
         item_purchased.quantity_free = request.POST['quantity_free']
-        item_purchased.amount = int(request.POST['price'])*int(request.POST['quantity'])*(1+int(request.POST['cgst'])/100)*(1+int(request.POST['sgst'])/100)*(1-int(request.POST['discount'])/100)
+        # Updating the invoice as per the changes in item
+        difference = int(request.POST['amount']) - item_purchased.amount
+        item_purchased.invoice.Raw_amount += difference
+        item_purchased.invoice.Final_amount += difference
+        # Added manually updating amount
+        item_purchased.amount = int(request.POST['amount'])
+        raw_amount = int(request.POST['quantity'])*int(request.POST['price'])
+        item_purchased.discount = ((raw_amount-item_purchased.amount)/raw_amount)*100
+        item_purchased.invoice.save()
         item_purchased.save()
         return redirect('viewSupplierInvoice',item_purchased.invoice.Inv_num)
 
